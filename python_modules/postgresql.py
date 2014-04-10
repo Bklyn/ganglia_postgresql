@@ -71,14 +71,14 @@ metric_defs = {
         "query": "SELECT COALESCE(max(COALESCE(ROUND(EXTRACT(epoch " + \
             "FROM now()-query_start)),0)),0) AS " + \
             "query_time_idle_in_txn FROM pg_stat_activity " + \
-            "WHERE current_query = '% in transaction';"
+            "WHERE state = 'idle in transaction';"
     },
     "pg_max_idle_txn_time": {
         "description": "Age of longest idle transaction",
         "units": "seconds",
         "query": "SELECT COALESCE(max(COALESCE(ROUND(EXTRACT(epoch " + \
             "FROM now()-query_start)),0)),0) as query_time_max FROM " + \
-             "pg_stat_activity WHERE current_query <> '<IDLE>';"
+             "pg_stat_activity WHERE state = 'idle';"
     },
     "pg_txn_time_max": {
         "description": "Age of longest transaction",
